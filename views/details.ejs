@@ -1,0 +1,41 @@
+<% layout("layout") %>
+
+<div class="incident-view">
+
+    <h2><%= incident.title %></h2>
+    <div class="meta">
+        <b>Type:</b> <span class="text-info"><%= incident.type %></span>
+    </div>
+
+    <img src="<%= incident.image %>" class="incident-img">
+
+    <p><b>Description:</b> <%= incident.description %></p>
+
+    <p><b>Status:</b> 
+        <span class="badge bg-info"><%= incident.status %></span>
+    </p>
+
+    <p><b>Verified:</b>
+        <span class="badge <%= incident.verified?'bg-success':'bg-warning' %>">
+            <%= incident.verified?'Verified':'Pending' %>
+        </span>
+    </p>
+
+    
+    <div class="action-box mt-4">
+        <form action="/incidents/<%= incident._id %>/status" method="POST" class="d-flex gap-3">
+            <select name="status" class="form-select w-50">
+                <option>Open</option>
+                <option>In-Progress</option>
+                <option>Resolved</option>
+            </select>
+            <button class="btn btn-primary">Update</button>
+            <a href="/map?lat=<%= incident.location.lat %>&lng=<%= incident.location.lng %>" 
+   class="btn btn-success w-100 mt-3">
+   📍Location
+</a>
+
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,16 @@
+# Node Modules
+node_modules/
+
+# Env Keys
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploaded Images (optional)
+uploads/
+
+# System files
+.DS_Store
+Thumbs.db

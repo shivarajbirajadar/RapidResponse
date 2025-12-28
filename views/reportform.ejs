@@ -1,0 +1,28 @@
+<% layout("layout") %>
+
+<div class="report-container">
+
+    <h2 class="report-title">📍 Report an Incident</h2>
+
+    <form action="/incidents" method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="title" placeholder="Title" class="form-control mb-3">
+
+        <select name="type" class="form-select mb-3">
+            <option>Accident</option>
+            <option>Fire</option>
+            <option>Medical</option>
+            <option>Crime</option>
+            <option>Infrastructure Failure</option>
+        </select>
+
+        <textarea name="description" placeholder="Description" rows="3" class="form-control mb-3"></textarea>
+
+        <input type="text" name="address" placeholder="Address" class="form-control mb-3">
+
+        <input type="file" name="image" class="form-control mb-4">
+
+        <button class="report-btn">Submit Report</button>
+
+    </form>
+</div>

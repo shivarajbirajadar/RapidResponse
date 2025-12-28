@@ -1,0 +1,64 @@
+<% layout("layout") %>
+
+<div class="dashboard-wrap">
+
+    <h2 class="dashboard-title text-center">Admin Dashboard</h2>
+
+    <!-- FILTERS -->
+    <form action="/admin/dashboard" method="GET" class="d-flex gap-3 mb-4 filter-area">
+        <select name="type" class="form-select w-auto">
+            <option value="">All Types</option>
+            <option>Accident</option>
+            <option>Fire</option>
+            <option>Medical</option>
+            <option>Crime</option>
+            <option>Infrastructure Failure</option>
+        </select>
+
+        <select name="status" class="form-select w-auto">
+            <option value="">All Status</option>
+            <option>Open</option>
+            <option>In-Progress</option>
+            <option>Resolved</option>
+        </select>
+
+        <button class="btn">Filter</button>
+    </form>
+
+
+    <!-- TABLE -->
+    <table class="table table-bordered dashboard-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Verified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <% incidents.forEach(i=>{ %>
+            <tr>
+                <td><%= i.title %></td>
+                <td><span class="badge bg-danger"><%= i.type %></span></td>
+                <td><span class="badge bg-info"><%= i.status %></span></td>
+                <td>
+                    <span class="badge 
+ <%= i.severity=='High'?'bg-danger':
+     i.severity=='Medium'?'bg-warning':
+     'bg-secondary' %>">
+ <%= i.severity %>
+</span>
+                </td>
+                <td><a href="/incidents/<%= i._id %>" 
+    class="btn view-btn">
+    <i class="fa-solid fa-eye"></i>&nbsp; View
+ </a></td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+
+</div>

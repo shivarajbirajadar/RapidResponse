@@ -1,0 +1,49 @@
+<% layout("layout") %>
+<div class="text-center">
+    <h1 class="hero-title">Rapid Response Platform</h1>
+<p class="hero-sub">Report emergencies fast & help save lives</p>
+
+   <a href="/incidents/new" class="report-main-btn">
+   🚨 Report Emergency / आपातकाल बताएं
+</a>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2 class="text-light text-center mb-3">Recent Incidents</h2>
+
+<div class="container">
+<table class="table table-dark table-striped table-hover rounded">
+<thead>
+<tr>
+ <th>Title</th>
+ <th>Type</th>
+ <th>Status</th>
+ <th>View</th>
+</tr>
+</thead>
+
+<tbody>
+<% incidents.forEach(i => { %>
+<tr>
+ <td><%= i.title %></td>
+ <td><span class="badge bg-danger"><%= i.type %></span></td>
+ <td><span class="badge bg-info"><%= i.status %></span></td>
+ <td><a href="/incidents/<%= i._id %>" 
+   class="btn btn-sm view-btn d-flex align-items-center justify-content-center gap-1">
+   👁️ View
+</a>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+
+<div class="text-center mt-3">
+  <a href="/incidents" class="btn btn-outline-light">View All Incidents</a>
+</div>
+</div>

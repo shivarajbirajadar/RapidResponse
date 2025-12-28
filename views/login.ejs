@@ -1,0 +1,28 @@
+<% layout("layout") %>
+
+<div class="d-flex justify-content-center align-items-center" 
+     style="height:80vh;">
+
+    <form method="POST" action="/login" 
+          class="glass-card p-4 shadow-lg"
+          style="width:350px;border-radius:12px;">
+
+        <h2 class="text-center mb-3 text-info fw-bold">
+            <i class="fas fa-user-shield"></i> Login
+        </h2>
+
+        <input name="username" class="form-control mb-3" 
+               placeholder="Username" required>
+
+        <input name="password" type="password" 
+               class="form-control mb-3" placeholder="Password" required>
+
+        <button class="btn btn-info w-100 fw-bold">
+            <i class="fas fa-right-to-bracket"></i> Login
+        </button>
+
+        <p class="text-center mt-3 text-light">
+            New here? <a href="/signup" class="text-warning fw-bold">Create Account</a>
+        </p>
+    </form>
+</div>
