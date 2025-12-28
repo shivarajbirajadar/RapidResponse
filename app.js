@@ -12,8 +12,10 @@ const ejsMate = require("ejs-mate");
 const userRoutes = require("./routes/userroutes");
 const incidentRoutes = require("./routes/incidentroutes");
 const adminRoutes = require("./routes/adminroutes");
-
 const Incident = require("./models/incident");
+
+// ⭐ Atlas URL from .env
+const dbUrl = process.env.ATLASDB_URL;
 
 // VIEW ENGINE
 app.engine("ejs", ejsMate);
@@ -26,25 +28,25 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,"public")));
 
-// SESSION (before routes!)
+// ⭐ SESSION (use env secret)
 app.use(session({
-    secret:"rapidresponse_secret",
+    secret: process.env.SECRET,
     resave:false,
     saveUninitialized:true
 }));
 
-// ⭐ GLOBAL ACCESS VARIABLE (this is main fix)
+// ⭐ GLOBAL USER INFO
 app.use((req,res,next)=>{
     res.locals.user = req.session.user || null;
     next();
 });
 
-// ROUTES (Only once)
+// ROUTES
 app.use("/", userRoutes);
 app.use("/", incidentRoutes);
 app.use("/admin", adminRoutes);
 
-// HOME PAGE
+// HOME
 app.get("/", async (req,res)=>{
     const incidents = await Incident.find({}).sort({createdAt:-1}).limit(5);
     res.render("home",{incidents});
@@ -53,11 +55,10 @@ app.get("/", async (req,res)=>{
 // SOCKET
 io.on("connection", ()=> console.log("Socket Connected"));
 
-// MONGO & SERVER
-mongoose.connect("mongodb://127.0.0.1:27017/rapidResponse")
-.then(()=> console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+// ⭐ MONGODB CONNECT USING ATLAS
+mongoose.connect(dbUrl)
+.then(()=> console.log("MongoDB Atlas Connected ✔"))
+.catch(err => console.log("DB Error ❌",err));
 
-http.listen(3000, ()=>{
-    console.log("Server Running → http://localhost:3000");
-});
+const PORT = process.env.PORT || 3000;
+http.listen(PORT, ()=> console.log("Server running on port", PORT));
