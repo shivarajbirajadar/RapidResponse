@@ -1,9 +1,12 @@
-const NodeGeocoder = require("node-geocoder");
+const NodeGeocoder = require('node-geocoder');
 
 const options = {
-  provider: "openstreetmap"
+  provider: 'openstreetmap',
+  httpAdapter: 'https',
+  formatter: null,
+  headers: {
+    'User-Agent': 'RapidResponse-App/1.0 (shivarajbirajadar@gmail.com)' // <-- Required
+  }
 };
 
-const geocoder = NodeGeocoder(options);
-
-module.exports = geocoder;
+module.exports = NodeGeocoder(options);
