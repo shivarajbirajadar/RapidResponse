@@ -2,7 +2,7 @@ const geocoder = require("../config/geocoder");
 const Incident = require("../models/incident");
 
 module.exports.renderForm = (req,res)=>{
-    res.render("reportForm",{title:"Report Incident"});
+    res.render("reportform",{title:"Report Incident"});
 
 };
 
